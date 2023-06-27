@@ -140,24 +140,29 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
-            if event.type == pg.KEYDOWN and event.type == pg.K_SPACE:
+            if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
                 beam = Beam(bird)  # ビームクラスのインスタンスを生成する
         
         screen.blit(bg_img, [0, 0])
-        
-        if bird.rct.colliderect(bomb.rct):
+        if bomb is not None:
+            if bird.rct.colliderect(bomb.rct):
             # ゲームオーバー時に，こうかとん画像を切り替え，1秒間表示させる
-            bird.change_img(8, screen)
-            pg.display.update()
-            time.sleep(1)
-            return
+                bird.change_img(8, screen)
+                pg.display.update()
+                time.sleep(1)
+                return
 
         if beam is not None and bomb is not None:
-            if bomb.rct.colliderect()
-
+            if bomb.rct.colliderect(beam.rct):
+                bomb = None
+                beam = None
+                bird.change_img(6, screen)
+                pg.display.update()
+                
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
-        bomb.update(screen)
+        if bomb is not None:
+            bomb.update(screen)
         if beam is not None:
             beam.update(screen)
         pg.display.update()
