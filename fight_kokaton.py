@@ -42,12 +42,7 @@ class Bird:
         """
         self.img = pg.transform.flip(  # 左右反転
             pg.transform.rotozoom(  # 2倍に拡大
-                pg.image.load(f"ex03/fig/{num}.png"), 
-                0, 
-                2.0), 
-            True, 
-            False
-        )
+                pg.image.load(f"ex03/fig/{num}.png"), 0, 2.0), True, False)
         img0 = pg.transform.rotozoom(pg.image.load(f"ex03/fig/{num}.png"),
         0, 2.0)  # 左向き
         img = pg.transform.flip(img0, True, False)  # 右向き
